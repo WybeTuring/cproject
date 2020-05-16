@@ -5,21 +5,6 @@
 
 using namespace std;
 
-/* You can use this function to simulate
-probabilities */
-/*
-bool simulate_prob(float prob){
-
-    prob = prob*1000.0;
-
-    srand(time(NULL));
-
-    if (rand()%1000 <= prob)
-        return true;
-
-    return false;
-}
-*/
 
 int main(){
 
@@ -106,8 +91,10 @@ int main(){
                 break;
 
             case 2:
-                corona_graph.infect_patient_zero();
-                corona_graph.simulate_spread();
+                corona_graph.reset();
+                for(int i = 0; i < 100; i++){
+                    corona_graph.simulate_spread();
+                }
                 cout << "Simulation over :)" << endl;
                 break;
 
@@ -116,11 +103,16 @@ int main(){
                 break;
 
             case 4:
-
+                corona_graph.control_policy();
+                for(int i = 0; i < 100; i++){
+                    corona_graph.simulate_spread();
+                }
                 break;
 
             case 5:
                 return 0; // exiting
+            default:
+                cout << " Please your choice must respect 1 <= choice <= 5. " << endl;
         }
     }
 }
